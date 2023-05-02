@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app"
-import 'firebase/auth'
-import 'firebase/firestore'
+import { getAuth } from "firebase/auth"
+import { getFirestore } from "firebase/firestore"
+import { serverTimestamp } from "firebase/firestore"
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyA5wVa9CWUCM0BEhzZKzuITjxO2CZjMvQQ",
@@ -12,11 +14,14 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const firebase = initializeApp(firebaseConfig);
+const db = getFirestore(firebase)
+const auth = getAuth()
 
-const db = firebase.firestore()
-const auth = firebase.auth()
-const marcarTempo = firebase.firestore.FieldValue.serverTimestamp
+const updateTimestamp = serverTimestamp()
 
-export { db, auth, marcarTempo }
+
+// const marcarTempo = firebase.firestore.FieldValue.serverTimestamp
+
+export { db, auth, firebase, updateTimestamp }
 
